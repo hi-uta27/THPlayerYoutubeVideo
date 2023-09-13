@@ -87,7 +87,7 @@ public class VideoPlayerViewController: UIViewController {
             if #available(iOS 16, *) {
                 let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene
                 self.setNeedsUpdateOfSupportedInterfaceOrientations()
-                self.navigationController?.setNeedsUpdateOfSupportedInterfaceOrientations()
+//                self.navigationController?.setNeedsUpdateOfSupportedInterfaceOrientations()
                 self.expandButton.isSelected = windowScene?.interfaceOrientation == .landscapeLeft || windowScene?.interfaceOrientation == .landscapeRight
                 windowScene?.requestGeometryUpdate(.iOS(interfaceOrientations: windowScene?.interfaceOrientation == .portrait ? .landscapeRight : .portrait)) { error in
                     fatalError(error.localizedDescription)
@@ -102,8 +102,8 @@ public class VideoPlayerViewController: UIViewController {
     }
 
     override public func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-        let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene
-        expandButton.isSelected = windowScene?.interfaceOrientation == .landscapeLeft || windowScene?.interfaceOrientation == .landscapeRight
+        super.viewWillTransition(to: size, with: coordinator)
+        expandButton.isSelected = UIDevice.current.orientation == .landscapeLeft || UIDevice.current.orientation == .landscapeRight
     }
 }
 
