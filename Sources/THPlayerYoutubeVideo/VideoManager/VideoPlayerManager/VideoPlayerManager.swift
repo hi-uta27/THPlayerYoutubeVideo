@@ -4,7 +4,7 @@ import XCDYouTubeKit
 
 class VideoPlayerManager: NSObject {
     private var timeObserver: Any?
-    private var player: AVPlayer!
+    private var player: AVPlayer?
     private(set) var controller: AVPlayerViewController!
     private var delegate: VideoPlayerManagerDelegate?
 
@@ -45,7 +45,7 @@ extension VideoPlayerManager {
         controller?.showsPlaybackControls = false
         controller?.player = player
         isPlaying = true
-        player.play()
+        player?.play()
     }
 
     func play(with videoYTID: String, loadingComplete: @escaping (Result<Bool, Error>) -> Void) {
@@ -75,19 +75,19 @@ extension VideoPlayerManager {
 
     func changePlayState() {
         if isPlaying {
-            player.pause()
+            player?.pause()
         } else {
-            player.play()
+            player?.play()
         }
         isPlaying.toggle()
     }
 
     func seekTo(second: Int) {
-        let currentTime = player.currentTime()
+        guard let currentTime = player?.currentTime() else { return }
         let secondTime = CMTime(seconds: Double(second), preferredTimescale: CMTimeScale(NSEC_PER_SEC))
-        player.seek(to: currentTime + secondTime,
-                    toleranceBefore: .zero,
-                    toleranceAfter: .zero)
+        player?.seek(to: currentTime + secondTime,
+                     toleranceBefore: .zero,
+                     toleranceAfter: .zero)
     }
 }
 
@@ -103,12 +103,12 @@ extension VideoPlayerManager: VideoPlayerNotification {
     }
 
     func playerItemReadyToPlay() {
-        timeObserver = player.addPeriodicTimeObserver(
+        timeObserver = player?.addPeriodicTimeObserver(
             forInterval: CMTime(value: 1, timescale: CMTimeScale(NSEC_PER_SEC)),
             queue: .main)
         { [weak self] currentTime in
-            guard self?.player.currentItem?.status == .readyToPlay,
-                  let durationDouble = self?.player.currentItem?.duration.seconds else { return }
+            guard self?.player?.currentItem?.status == .readyToPlay,
+                  let durationDouble = self?.player?.currentItem?.duration.seconds else { return }
             let duration = Int(durationDouble)
             let second = Int(CMTimeGetSeconds(currentTime))
             self?.delegate?.currentTime(second: second, duration: duration)
