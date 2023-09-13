@@ -92,7 +92,6 @@ public class VideoPlayerViewController: UIViewController {
             if #available(iOS 16, *) {
                 let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene
                 self.setNeedsUpdateOfSupportedInterfaceOrientations()
-                self.expandButton.isSelected = windowScene?.interfaceOrientation == .landscapeLeft || windowScene?.interfaceOrientation == .landscapeRight
                 windowScene?.requestGeometryUpdate(.iOS(interfaceOrientations: windowScene?.interfaceOrientation == .portrait ? .landscapeRight : .portrait)) { error in
                     fatalError(error.localizedDescription)
                 }
