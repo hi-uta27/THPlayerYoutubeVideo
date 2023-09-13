@@ -25,7 +25,7 @@ let package = Package(
             name: "THPlayerYoutubeVideo",
             dependencies: ["SDWebImage", "XCDYouTubeKit"],
             resources: [
-                .copy("VideoPlayerViewController.storyboard"),
+                .copy("Sources/THPlayerYoutubeVideo/VideoManager/Presentations/VideoPlayerViewController.storyboard"),
             ]),
         .testTarget(
             name: "THPlayerYoutubeVideoTests",
