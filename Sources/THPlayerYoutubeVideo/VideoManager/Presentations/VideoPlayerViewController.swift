@@ -138,3 +138,5 @@ public extension VideoPlayerViewController {
         UIStoryboard(name: "\(Self.self)", bundle: Bundle.module)
     }
 }
+
+class A: UIViewController {}
