@@ -31,8 +31,6 @@ class VideoPlayerManager: NSObject {
         removeNotification()
         guard let timeObserver else { return }
         player?.removeTimeObserver(timeObserver)
-        controller?.player = nil
-        player = nil
     }
 }
 
