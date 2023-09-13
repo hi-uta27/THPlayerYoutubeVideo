@@ -124,7 +124,7 @@ extension VideoPlayerViewController: VideoPlayerManagerDelegate {
 
 public extension VideoPlayerViewController {
     static func initial(videoID: String, thumnailURL: String) -> VideoPlayerViewController {
-        print(Self.self, #function, "Init from ", Bundle.module)
+        print(Self.self, #function, "Init from ", Bundle.module.bundleIdentifier ?? "NSBundle")
         let storyboard = UIStoryboard(name: "\(Self.self)", bundle: Bundle.module)
         let viewController = storyboard.instantiateViewController(withIdentifier: "\(Self.self)") as! VideoPlayerViewController
         viewController.videoID = videoID
