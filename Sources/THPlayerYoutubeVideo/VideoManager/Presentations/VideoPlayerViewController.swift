@@ -22,11 +22,6 @@ public class VideoPlayerViewController: UIViewController {
         configView()
     }
 
-    public func setVideoID(videoID: String, thumnailURL: String) {
-        self.videoID = videoID
-        self.thumnailURL = thumnailURL
-    }
-
     private func configView() {
         thumnailImageView.sd_setImage(with: URL(string: thumnailURL))
         containerActionView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tapInsideContainerActionView)))
@@ -128,15 +123,11 @@ extension VideoPlayerViewController: VideoPlayerManagerDelegate {
 // MARK: Init
 
 public extension VideoPlayerViewController {
-    static func initial() -> VideoPlayerViewController {
-        let storyboard = Self.loadStoryboard()
-        let viewController = storyboard?.instantiateViewController(withIdentifier: "\(Self.self)") as! VideoPlayerViewController
+    static func initial(videoID: String, thumnailURL: String) -> VideoPlayerViewController {
+        let storyboard = UIStoryboard(name: "\(Self.self)", bundle: Bundle.module)
+        let viewController = storyboard.instantiateViewController(withIdentifier: "\(Self.self)") as! VideoPlayerViewController
+        viewController.videoID = videoID
+        viewController.thumnailURL = thumnailURL
         return viewController
     }
-
-    static func loadStoryboard() -> UIStoryboard? {
-        UIStoryboard(name: "\(Self.self)", bundle: Bundle.module)
-    }
 }
-
-class A: UIViewController {}
