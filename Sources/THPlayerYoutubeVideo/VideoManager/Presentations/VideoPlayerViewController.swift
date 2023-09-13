@@ -17,9 +17,6 @@ public class VideoPlayerViewController: UIViewController {
     private var debouncer: Debouncer?
     private lazy var videoPlayerManager = VideoPlayerManager(delegate: self)
 
-    public var swipeDownView: (() -> Void)!
-    public var swipeUpView: (() -> Void)!
-
     override public func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         registerDeviceOrientationNotification()
@@ -48,18 +45,6 @@ public class VideoPlayerViewController: UIViewController {
                 }
             }
         }
-        let swipeDown = UISwipeGestureRecognizer(target: self, action: #selector(swipeDownInsideContainerActionView))
-        containerActionView.addGestureRecognizer(swipeDown)
-        let swipeUp = UISwipeGestureRecognizer(target: self, action: #selector(swipeUpInsideContainerActionView))
-        containerActionView.addGestureRecognizer(swipeUp)
-    }
-
-    @objc private func swipeDownInsideContainerActionView() {
-        swipeDownView?()
-    }
-
-    @objc private func swipeUpInsideContainerActionView() {
-        swipeUpView?()
     }
 
     private func addVideoPlayer() {
