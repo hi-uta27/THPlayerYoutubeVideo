@@ -23,10 +23,7 @@ let package = Package(
         // Targets can depend on other targets in this package, and on products in packages this package depends on.
         .target(
             name: "THPlayerYoutubeVideo",
-            dependencies: ["SDWebImage", "XCDYouTubeKit"],
-            resources: [
-                .copy("VideoPlayerViewController.storyboard"),
-            ]),
+            dependencies: ["SDWebImage", "XCDYouTubeKit"]),
         .testTarget(
             name: "THPlayerYoutubeVideoTests",
             dependencies: ["THPlayerYoutubeVideo"]),

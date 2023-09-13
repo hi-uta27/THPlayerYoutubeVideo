@@ -124,3 +124,12 @@ extension VideoPlayerViewController: VideoPlayerManagerDelegate {
         playButton.isSelected = isPlaying
     }
 }
+
+// MARK: Init
+
+public extension VideoPlayerViewController {
+    static func initial() -> UIStoryboard? {
+        let packageBundle = Bundle.module
+        return UIStoryboard(name: "VideoPlayerViewController", bundle: packageBundle)
+    }
+}
