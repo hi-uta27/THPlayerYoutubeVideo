@@ -24,7 +24,7 @@ let package = Package(
         .target(
             name: "THPlayerYoutubeVideo",
             dependencies: ["SDWebImage", "XCDYouTubeKit"],
-            path: "Sources"),
+            path: "Sources/"),
         .testTarget(
             name: "THPlayerYoutubeVideoTests",
             dependencies: ["THPlayerYoutubeVideo"]),
