@@ -2,7 +2,7 @@
 This my first package, this's use for play video with AVPlayer
 
 ### How to use it?
-- Import package from Package dependency:
+- Import from Package dependency:
 ```swift
 .dependencies: [
     .package(url: "https://github.com/hi-uta27/THPlayerYoutubeVideo", from: "main"),
