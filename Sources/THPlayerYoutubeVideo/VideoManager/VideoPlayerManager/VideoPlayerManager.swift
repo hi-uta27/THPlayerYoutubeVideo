@@ -25,17 +25,14 @@ class VideoPlayerManager: NSObject {
         }
         registerNotification()
         self.delegate = delegate
-        player = .init()
-        controller = .init()
-        controller.showsPlaybackControls = false
     }
 
     deinit {
         removeNotification()
         guard let timeObserver else { return }
-        player.removeTimeObserver(timeObserver)
+        player?.removeTimeObserver(timeObserver)
+        controller?.player = nil
         player = nil
-        controller = nil
     }
 }
 
@@ -44,7 +41,9 @@ class VideoPlayerManager: NSObject {
 extension VideoPlayerManager {
     func play(url: URL) {
         player = AVPlayer(url: url)
-        controller.player = player
+        controller = .init()
+        controller?.showsPlaybackControls = false
+        controller?.player = player
         isPlaying = true
         player.play()
     }
@@ -96,11 +95,11 @@ extension VideoPlayerManager {
 
 extension VideoPlayerManager: VideoPlayerNotification {
     func didEnterBackground() {
-        controller.player = nil
+        controller?.player = nil
     }
 
     func willEnterForeground() {
-        controller.player = player
+        controller?.player = player
     }
 
     func playerItemReadyToPlay() {
