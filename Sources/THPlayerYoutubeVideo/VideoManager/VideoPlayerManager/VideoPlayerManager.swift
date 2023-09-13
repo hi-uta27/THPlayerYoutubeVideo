@@ -4,8 +4,8 @@ import XCDYouTubeKit
 
 class VideoPlayerManager: NSObject {
     private var timeObserver: Any?
-    private var player: AVPlayer = .init()
-    private(set) var controller = AVPlayerViewController()
+    private var player: AVPlayer!
+    private(set) var controller: AVPlayerViewController!
     private var delegate: VideoPlayerManagerDelegate?
 
     private(set) var duration: Double!
@@ -25,6 +25,8 @@ class VideoPlayerManager: NSObject {
         }
         registerNotification()
         self.delegate = delegate
+        player = .init()
+        controller = .init()
         controller.showsPlaybackControls = false
     }
 
@@ -32,6 +34,8 @@ class VideoPlayerManager: NSObject {
         removeNotification()
         guard let timeObserver else { return }
         player.removeTimeObserver(timeObserver)
+        player = nil
+        controller = nil
     }
 }
 
