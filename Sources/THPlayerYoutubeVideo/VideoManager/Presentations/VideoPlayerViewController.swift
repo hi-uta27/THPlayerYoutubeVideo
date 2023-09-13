@@ -129,8 +129,7 @@ extension VideoPlayerViewController: VideoPlayerManagerDelegate {
 
 public extension VideoPlayerViewController {
     static func initial() -> Self {
-        let packageBundle = Bundle.module
-        let storyboard = UIStoryboard(name: "\(Self.self)", bundle: packageBundle)
+        let storyboard = UIStoryboard(name: "\(Self.self)", bundle: nil)
         let viewController = storyboard.instantiateViewController(withIdentifier: "\(Self.self)") as! Self
         return viewController
     }
