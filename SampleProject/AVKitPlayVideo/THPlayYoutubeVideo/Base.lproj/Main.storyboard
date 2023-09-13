@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="THPlayYoutubeVideo" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Sd6-9A-hFp">
+                                <rect key="frame" x="159" y="409" width="75" height="34.333333333333314"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Button"/>
+                                <connections>
+                                    <action selector="touchUpInsidePlayManagerButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="XmF-iT-sOr"/>
+                                </connections>
+                            </button>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bH0-fW-Wjr">
+                                <rect key="frame" x="0.0" y="59" width="393" height="221"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="bH0-fW-Wjr" secondAttribute="height" multiplier="16:9" id="Rjl-4v-tRf"/>
+                                </constraints>
+                                <connections>
+                                    <segue destination="363-4v-wDP" kind="embed" identifier="VideoPlayerViewControllerSegue" id="lsD-pn-qdG"/>
+                                </connections>
+                            </containerView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="bH0-fW-Wjr" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="Ii7-NI-rnj"/>
+                            <constraint firstItem="Sd6-9A-hFp" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Jm1-sO-iCd"/>
+                            <constraint firstItem="bH0-fW-Wjr" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="n0Y-PV-e56"/>
+                            <constraint firstItem="bH0-fW-Wjr" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="tuK-bK-f6i"/>
+                            <constraint firstItem="Sd6-9A-hFp" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="yHa-dv-8WZ"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-51" y="-27"/>
+        </scene>
+        <!--VideoPlayerViewController-->
+        <scene sceneID="v9S-Re-56U">
+            <objects>
+                <viewControllerPlaceholder storyboardName="VideoPlayerViewController" id="363-4v-wDP" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Z7Y-5g-EXg" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="578" y="156"/>
+        </scene>
+    </scenes>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

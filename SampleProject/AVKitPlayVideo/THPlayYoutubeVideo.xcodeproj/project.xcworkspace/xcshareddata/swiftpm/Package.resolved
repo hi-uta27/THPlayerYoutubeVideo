@@ -1,0 +1,23 @@
+{
+  "pins" : [
+    {
+      "identity" : "sdwebimage",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/SDWebImage/SDWebImage.git",
+      "state" : {
+        "revision" : "36e484b317522667a4b2de9b50daaa01dfa30809",
+        "version" : "5.18.0"
+      }
+    },
+    {
+      "identity" : "xcdyoutubekit",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/cbg-dev-k/XCDYouTubeKit",
+      "state" : {
+        "revision" : "f2b1b685c375edca711cc2b229f6bf2bb4588611",
+        "version" : "2.16.0"
+      }
+    }
+  ],
+  "version" : 2
+}
