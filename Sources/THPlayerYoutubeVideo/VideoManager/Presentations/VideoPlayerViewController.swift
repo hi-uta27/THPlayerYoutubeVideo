@@ -17,6 +17,11 @@ public class VideoPlayerViewController: UIViewController {
     private var debouncer: Debouncer?
     private lazy var videoPlayerManager = VideoPlayerManager(delegate: self)
 
+    override public func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        registerDeviceOrientationNotification()
+    }
+
     override public func viewDidLoad() {
         super.viewDidLoad()
         configView()
@@ -87,7 +92,6 @@ public class VideoPlayerViewController: UIViewController {
             if #available(iOS 16, *) {
                 let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene
                 self.setNeedsUpdateOfSupportedInterfaceOrientations()
-//                self.navigationController?.setNeedsUpdateOfSupportedInterfaceOrientations()
                 self.expandButton.isSelected = windowScene?.interfaceOrientation == .landscapeLeft || windowScene?.interfaceOrientation == .landscapeRight
                 windowScene?.requestGeometryUpdate(.iOS(interfaceOrientations: windowScene?.interfaceOrientation == .portrait ? .landscapeRight : .portrait)) { error in
                     fatalError(error.localizedDescription)
@@ -101,9 +105,21 @@ public class VideoPlayerViewController: UIViewController {
         }
     }
 
-    override public func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-        super.viewWillTransition(to: size, with: coordinator)
-        expandButton.isSelected = UIDevice.current.orientation == .landscapeLeft || UIDevice.current.orientation == .landscapeRight
+    deinit {
+        removeDeviceOrientationNotification()
+    }
+}
+
+// MARK: Init
+
+public extension VideoPlayerViewController {
+    static func initial(videoID: String, thumnailURL: String) -> VideoPlayerViewController {
+        print(Self.self, #function, "Init from ", Bundle.module.bundleIdentifier ?? "NSBundle")
+        let storyboard = UIStoryboard(name: "\(Self.self)", bundle: Bundle.module)
+        let viewController = storyboard.instantiateViewController(withIdentifier: "\(Self.self)") as! VideoPlayerViewController
+        viewController.videoID = videoID
+        viewController.thumnailURL = thumnailURL
+        return viewController
     }
 }
 
@@ -120,15 +136,10 @@ extension VideoPlayerViewController: VideoPlayerManagerDelegate {
     }
 }
 
-// MARK: Init
+// MARK:
 
-public extension VideoPlayerViewController {
-    static func initial(videoID: String, thumnailURL: String) -> VideoPlayerViewController {
-        print(Self.self, #function, "Init from ", Bundle.module.bundleIdentifier ?? "NSBundle")
-        let storyboard = UIStoryboard(name: "\(Self.self)", bundle: Bundle.module)
-        let viewController = storyboard.instantiateViewController(withIdentifier: "\(Self.self)") as! VideoPlayerViewController
-        viewController.videoID = videoID
-        viewController.thumnailURL = thumnailURL
-        return viewController
+extension VideoPlayerViewController: DeviceOrientationNotification {
+    func didChangedOrientation() {
+        expandButton.isSelected = UIDevice.current.orientation == .landscapeLeft || UIDevice.current.orientation == .landscapeRight
     }
 }
