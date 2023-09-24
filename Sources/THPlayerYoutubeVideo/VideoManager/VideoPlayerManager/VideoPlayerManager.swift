@@ -4,8 +4,8 @@ import XCDYouTubeKit
 
 class VideoPlayerManager: NSObject {
     private var timeObserver: Any?
-    private var player: AVPlayer = .init()
-    private(set) var controller: AVPlayerViewController = .init()
+    private lazy var player: AVPlayer = .init()
+    private(set) lazy var controller: AVPlayerViewController = .init()
     private var delegate: VideoPlayerManagerDelegate?
 
     private(set) var duration: Double!
