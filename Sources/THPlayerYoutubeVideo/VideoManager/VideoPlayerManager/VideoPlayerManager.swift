@@ -18,7 +18,7 @@ class VideoPlayerManager: NSObject {
     init(delegate: VideoPlayerManagerDelegate?) {
         super.init()
         do {
-            try AVAudioSession.sharedInstance().setCategory(.playback, mode: .moviePlayback, options: [.allowAirPlay])
+            try AVAudioSession.sharedInstance().setCategory(.playback, mode: .moviePlayback)//, options: [.allowAirPlay])
             try AVAudioSession.sharedInstance().setActive(true)
         } catch let error as NSError {
             fatalError(error.localizedDescription)
