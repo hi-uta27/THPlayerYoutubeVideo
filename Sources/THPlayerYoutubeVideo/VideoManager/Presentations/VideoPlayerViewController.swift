@@ -15,7 +15,7 @@ public class VideoPlayerViewController: UIViewController {
     private var videoID: String!
     private var thumnailURL: String!
     private var debouncer: Debouncer?
-    private lazy var videoPlayerManager = VideoPlayerManager(delegate: self)
+    private lazy var videoPlayerManager = VideoPlayerManager.shared
 
     override public func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -25,6 +25,7 @@ public class VideoPlayerViewController: UIViewController {
     override public func viewDidLoad() {
         super.viewDidLoad()
         configView()
+        videoPlayerManager.setDelegate(delegate: self)
     }
 
     private func configView() {

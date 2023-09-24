@@ -3,6 +3,8 @@ import Foundation
 import XCDYouTubeKit
 
 class VideoPlayerManager: NSObject {
+    static let shared = VideoPlayerManager()
+
     private var timeObserver: Any?
     private lazy var player: AVPlayer = .init()
     private(set) lazy var controller: AVPlayerViewController = .init()
@@ -15,15 +17,18 @@ class VideoPlayerManager: NSObject {
         }
     }
 
-    init(delegate: VideoPlayerManagerDelegate?) {
+    override private init() {
         super.init()
         do {
-            try AVAudioSession.sharedInstance().setCategory(.playback, mode: .moviePlayback)//, options: [.allowAirPlay])
+            try AVAudioSession.sharedInstance().setCategory(.playback, mode: .moviePlayback, options: [.allowAirPlay])
             try AVAudioSession.sharedInstance().setActive(true)
         } catch let error as NSError {
             fatalError(error.localizedDescription)
         }
         registerNotification()
+    }
+
+    func setDelegate(delegate: VideoPlayerManagerDelegate) {
         self.delegate = delegate
     }
 
@@ -39,8 +44,6 @@ class VideoPlayerManager: NSObject {
 extension VideoPlayerManager {
     func play(url: URL) {
         let playerItem = AVPlayerItem(url: url)
-        player.pause()
-        controller.player?.pause()
         player.replaceCurrentItem(with: playerItem)
         controller.showsPlaybackControls = false
         controller.player = player
