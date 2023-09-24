@@ -40,6 +40,7 @@ extension VideoPlayerManager {
     func play(url: URL) {
         let playerItem = AVPlayerItem(url: url)
         player.pause()
+        controller.player?.pause()
         player.replaceCurrentItem(with: playerItem)
         controller.showsPlaybackControls = false
         controller.player = player
