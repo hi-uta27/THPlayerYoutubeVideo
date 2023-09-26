@@ -52,6 +52,8 @@ extension VideoPlayerManager {
     }
 
     func play(with videoYTID: String, loadingComplete: @escaping (Result<Bool, Error>) -> Void) {
+        player.pause()
+        controller.player?.pause()
         XCDYouTubeClient.default().getVideoWithIdentifier(videoYTID) { [weak self] (video: XCDYouTubeVideo?, error: Error?) in
             if let video {
                 self?.handleGetVideoSuccess(video: video, loadingComplete: loadingComplete)
