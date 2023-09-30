@@ -58,7 +58,7 @@ public class VideoPlayerViewController: UIViewController {
         containerActionView.isHidden = !isHidden
     }
 
-    private func displayActionView(isHidden: Bool) {
+    func displayActionView(isHidden: Bool) {
         containerSettingStackView.isHidden = isHidden
         containerPlayStateStackView.isHidden = isHidden
     }
