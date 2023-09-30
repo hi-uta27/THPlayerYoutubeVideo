@@ -63,10 +63,6 @@ public class VideoPlayerViewController: UIViewController {
         containerPlayStateStackView.isHidden = isHidden
     }
 
-    public func displayContainerActionView(isHidden: Bool) {
-        containerActionView.isHidden = isHidden
-    }
-
     @objc private func tapInsideContainerActionView() {
         displayActionView(isHidden: false)
         debouncer?.call()

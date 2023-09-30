@@ -6,6 +6,7 @@ class VideoPlayerManager: NSObject {
     static let shared = VideoPlayerManager()
 
     private var timeObserver: Any?
+    private var statusPlayerObserve: NSKeyValueObservation?
     private lazy var player: AVPlayer = .init()
     private(set) lazy var controller: AVPlayerViewController = .init()
     private var delegate: VideoPlayerManagerDelegate?
@@ -36,6 +37,7 @@ class VideoPlayerManager: NSObject {
         removeNotification()
         guard let timeObserver else { return }
         player.removeTimeObserver(timeObserver)
+        statusPlayerObserve = nil
     }
 }
 
@@ -44,6 +46,16 @@ class VideoPlayerManager: NSObject {
 extension VideoPlayerManager {
     func play(url: URL) {
         let playerItem = AVPlayerItem(url: url)
+        statusPlayerObserve = playerItem.observe(\.status) { playerItem, _ in
+            switch playerItem.status {
+            case .readyToPlay:
+                print(Self.self, #function, "Ready to play")
+            case .failed:
+                print(Self.self, #function, "Failed to play")
+            default:
+                print(Self.self, #function, "Unknown to play")
+            }
+        }
         player.replaceCurrentItem(with: playerItem)
         controller.showsPlaybackControls = false
         controller.player = player
